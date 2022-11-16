@@ -30,14 +30,22 @@ const testCases: any[] = []
 
 for (const [category_name, category_entries] of Object.entries(bigquery_fixtures)) {
   for (const group of category_entries) {
-    const groupResults = service.getEstimatesFromInputData(group)
     for (let i=0; i<group.length; i++) {
+      const record = new BillingExportRow(group[i])
       const entry = {
         "name": `${category_name}:${i}`,
         bigquery_row: group[i],
-        record: new BillingExportRow(group[i]),
-        estimate: groupResults[i] || {}
+        record: record,
+        estimate: service.getFootprintEstimateFromUsageRow(record, []) || {}
       }
+    // const groupResults = service(group)
+    // for (let i=0; i<group.length; i++) {
+    //   const entry = {
+    //     "name": `${category_name}:${i}`,
+    //     bigquery_row: group[i],
+    //     record: new BillingExportRow(group[i]),
+    //     estimate: groupResults[i] || {}
+    //   }
 
       testCases.push(entry)
     }

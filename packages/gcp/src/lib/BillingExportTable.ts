@@ -188,7 +188,7 @@ export default class BillingExportTable {
     return results
   }
 
-  private getFootprintEstimateFromUsageRow(
+  public getFootprintEstimateFromUsageRow(
     billingExportRow: BillingExportRow,
     unknownRows: BillingExportRow[],
   ): FootprintEstimate | void {
