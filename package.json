@@ -51,6 +51,7 @@
     "docs": "docsify serve --port 3001",
     "release": "changeset version && yarn install",
     "postinstall": "husky install",
+    "cycloid-scripts": "NODE_OPTIONS=\"--no-warnings\" ts-node -T cycloid/generate_all.ts",
     "version": "yarn changeset version && yarn install --no-immutable"
   }
 }
