@@ -34,6 +34,13 @@ export default class BillingExportRow extends BillingDataRow {
       this.usageAmount = this.usageAmount / 1000
   }
 
+  public getCycloidTestData() {
+    return {
+      isCloudComposerCompute: this.isCloudComposerCompute(),
+      isKubernetesCompute: this.isKubernetesCompute(),
+    }
+  }
+
   private getVCpuHours(): number {
     if (this.isCloudComposerCompute())
       return (

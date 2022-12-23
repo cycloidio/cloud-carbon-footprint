@@ -214,6 +214,24 @@ export default class ConsumptionManagementService {
     return result
   }
 
+  getCycloidTestData(consumptionDetailRow: ConsumptionDetailRow): any {
+    return {
+      estimate: this.getFootprintEstimateFromUsageRow(consumptionDetailRow, []),
+      terabyteHours: this.getUsageAmountInTerabyteHours(consumptionDetailRow),
+      gigabyteHours: this.getUsageAmountInGigabyteHours(consumptionDetailRow),
+      replicationFactor: this.getReplicationFactor(consumptionDetailRow) || 1,
+      isSSDStorage: this.isSSDStorage(consumptionDetailRow),
+      isHDDStorage: this.isHDDStorage(consumptionDetailRow),
+      isManagedDiskStorage: this.isManagedDiskStorage(consumptionDetailRow),
+      isContainerRegistryStorage: this.isContainerRegistryStorage(consumptionDetailRow),
+      isGpuUsage: this.isGpuUsage(consumptionDetailRow.usageType),
+      processors: this.getComputeProcessorsFromUsageType(consumptionDetailRow.usageType),
+      gpuProcessors: this.getGpuComputeProcessorsFromUsageType(consumptionDetailRow.usageType),
+      embodiedEmissionsUsage: this.getDataFromSeriesNameAndUsageType(consumptionDetailRow.seriesName, consumptionDetailRow.usageType),
+      ...consumptionDetailRow.getCycloidTestData()
+    }
+  }
+
   private getFootprintEstimateFromUsageRow(
     consumptionDetailRow: ConsumptionDetailRow,
     unknownRows: ConsumptionDetailRow[],

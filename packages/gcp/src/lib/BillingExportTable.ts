@@ -188,6 +188,17 @@ export default class BillingExportTable {
     return results
   }
 
+  getCycloidTestData(billingExportRow: BillingExportRow) {
+    return {
+      estimate: this.getFootprintEstimateFromUsageRow(billingExportRow, []),
+      replicationFactor: this.getReplicationFactor(billingExportRow),
+      embodiedEmissionsUsage: this.getDataFromMachineType(billingExportRow.machineType),
+      processors: this.getComputeProcessorsFromMachineType(billingExportRow.machineType),
+      gpuProcessors: this.getGpuComputeProcessorsFromUsageType(billingExportRow.usageType),
+      ...billingExportRow.getCycloidTestData(),
+    }
+  }
+
   private getFootprintEstimateFromUsageRow(
     billingExportRow: BillingExportRow,
     unknownRows: BillingExportRow[],

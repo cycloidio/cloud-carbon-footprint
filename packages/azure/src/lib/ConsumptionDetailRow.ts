@@ -41,6 +41,13 @@ export default class ConsumptionDetailRow extends BillingDataRow {
     )
   }
 
+  getCycloidTestData() {
+    return {
+      vcpus: this.getVCpus(),
+      gpus: this.getGpus(),
+    }
+  }
+
   private getGpus(): number {
     return GPU_VIRTUAL_MACHINE_TYPES[this.usageType] || 1
   }
